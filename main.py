@@ -2,7 +2,9 @@ import nltk
 import csv
 from constants import DESCRIPTORS, ATTRS_TO_CAPTURE
 
-def main():
+
+def write_data_from_csv_to_dict():
+	data = list()
 	with open("winemag-data-130k-v2.csv", 'r') as file_data:
 		csv_reader = csv.DictReader(file_data)
 		for row in csv_reader:
@@ -12,7 +14,8 @@ def main():
 			for k, v in row.items():
 				if k in ATTRS_TO_CAPTURE:
 					row_attrs[k] = row[k]
-			print row_attrs
+			data.append(row_attrs)
+	return data
 
 
 def get_word_counts_from_description(row_description):
@@ -25,7 +28,9 @@ def get_word_counts_from_description(row_description):
 	return word_counts
 
 
+def get_data():
+	return write_data_from_csv_to_dict()
 
 
 if __name__ == "__main__":
-    main()
+    get_data()
